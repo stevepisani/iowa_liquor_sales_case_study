@@ -6,18 +6,6 @@ Steven Pisani
 1. [Data Ingestion](#data-ingestion)
 2. [Data Transformation](#data-transformation)
 3. [Questions](#questions)
-  1. [What impact did Covid have on the overall liquor market in Iowa?](#1-what-impact-did-covid-have-on-the-overall-liquor-market-in-iowa)
-    a. [What trends evolved over the next 3-18 months?](#a-what-trends-evolved-over-the-next-3-18-months)
-    b. [Was there a notable shift in the types of products purchased in terms of pack size?](#b-was-there-a-notable-shift-in-the-types-of-products-purchased-in-terms-of-pack-size)
-  2. [Which are the fastest growing types of liquor (e.g., vodka, tequila, rum, etc.)? How has market share changed over time?](#2-which-are-the-fastest-growing-types-of-liquor-eg-vodka-tequila-rum-etc-how-has-market-share-changed-over-time)
-    a. [Write a function that takes a list of liquor types as an input and visualizes the market share over time for each of those.](#a-write-a-function-that-takes-a-list-of-liquor-types-as-an-input-and-visualizes-the-market-share-over-time-for-each-of-those)
-    b. [What is driving the growth in tequila sales? Increases in average price or increases in volume sold?](#b-what-is-driving-the-growth-in-tequila-sales-increases-in-average-price-or-increases-in-volume-sold)
-  3. [Grouping individual store brands together (e.g., all of Walmart, Liquor Barn, Hy-Vee, etc.), who are the top 10 retailers by year?](#3-grouping-individual-store-brands-together-eg-all-of-walmart-liquor-barn-hy-vee-etc-who-are-the-top-10-retailers-by-year)
-  4. [In late 2019 Heaven Hill Brands bought a portfolio of liquor brands from Constellation Brands. What percentage of Heaven Hill’s growth in 2020 can be attributed to the acquisition?](#4-in-late-2019-heaven-hill-brands-bought-a-portfolio-of-liquor-brands-from-constellation-brands-what-percentage-of-heaven-hills-growth-in-2020-can-be-attributed-to-the-acquisition)
-  5. [What data integrity issues did you discover? How could you (or how did you) solve/account for these?](#5-what-data-integrity-issues-did-you-discover-how-could-you-or-how-did-you-solveaccount-for-these)
-    a. [Comment on any data issues you discovered and what assumptions you used to deal with them.](#a-comment-on-any-data-issues-you-discovered-and-what-assumptions-you-used-to-deal-with-them)
-    b. [What’s a simple solution to solving data quality issues?](#b-whats-a-simple-solution-to-solving-data-quality-issues)
-    c. [What would be a more scalable solution to deal with quality issues?](#c-what-would-be-a-more-scalable-solution-to-deal-with-quality-issues)
 
 # Data Ingestion
 In the [`1_data_ingestion`](./1_data_ingestion/) directory, you will find a python script that will ingest the data from the Iowa Liquor Sales
