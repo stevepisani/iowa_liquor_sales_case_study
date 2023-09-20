@@ -1,6 +1,5 @@
 # Iowa Liquor Sales Case Study
 Steven Pisani
-
 > The following answers are more thoroughly detailed with the output of my analysis notebook saved in the `3_data_analysis` directory.
 
 ## Table of Contents
