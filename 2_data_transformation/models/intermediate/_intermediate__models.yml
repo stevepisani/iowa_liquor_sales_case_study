@@ -1,0 +1,68 @@
+version: 2
+
+models:
+  - name: int_categories
+    description: >-
+      Intermediate table for categories.
+    columns:
+      - name: category_id
+        description: >-
+          A unique ID number for each category.
+        tests:
+          - not_null
+          - unique
+
+  - name: int_counties
+    description: >-
+      Intermediate table for counties.
+    columns:
+      - name: county_id
+        description: >-
+          A unique ID number for each county.
+        tests:
+          - not_null
+          - unique
+
+  - name: int_invoices
+    description: >-
+      Intermediate table for invoices.
+    columns:
+      - name: invoice_id
+        description: >-
+          A unique ID number for each invoice.
+        tests:
+          - not_null
+          - unique
+  
+  - name: int_items
+    description: >-
+      Intermediate table for items.
+    columns:
+      - name: item_id
+        description: >-
+          A unique ID number for each item.
+        tests:
+          - not_null
+          - unique
+
+  - name: int_stores
+    description: >-
+      Intermediate table for stores.
+    columns:
+      - name: store_id
+        description: >-
+          A unique ID number for each store.
+        tests:
+          - not_null
+          - unique
+
+  - name: int_vendors
+    description: >-
+      Intermediate table for vendors.
+    columns:
+      - name: vendor_id
+        description: >-
+          A unique ID number for each vendor.
+        tests:
+          - not_null
+          - unique

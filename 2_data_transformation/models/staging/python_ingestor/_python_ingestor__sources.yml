@@ -1,0 +1,27 @@
+version: 2
+
+sources:
+  - name: iowa_liquor_sales
+    database: ingest_database
+    schema: iowa_liquor_sales
+    loader: python
+    loaded_at_field: loaded_at
+    
+    ## This is a useful feature of dbt in which one can test the freshness of the data in the source.
+    ## In this case, we do not have the data loading on a schedule, so it will not do anything useful.
+    # freshness:
+    #   warn_after: { count: 2, period: day }
+    #   error_after: { count: 3, period: day }
+    description: >-
+      This source contains all of the data from Google Sheets that we have are loading into our warehouse.
+      
+      In this case, we are only loading the single dataset provided in the prompt, but we could easily add more datasets
+      to this config if we wanted to load more data from Google Sheets.
+
+    tables:
+      - name: raw_data
+        description: >-
+          This table contains all of the data from the Iowa Liquor Sales dataset.
+          
+          This dataset contains all of the liquor sales in the state of Iowa from 2012 to 2018.
+          It contains information about the store, the item, the date, and the amount sold.

@@ -1,0 +1,23 @@
+version: 2
+
+models:
+  - name: invoices
+    description: >-
+      A denormalized table of invoices with all relevant information.
+    columns:
+      - name: invoice_id
+        description: >-
+          A unique ID number for each invoice.
+        tests:
+          - not_null
+          - unique
+  - name: stores
+    description: >-
+      A denormalized table of stores with all relevant information.
+    columns:
+      - name: store_id
+        description: >-
+          A unique ID number for each store.
+        tests:
+          - not_null
+          - unique
