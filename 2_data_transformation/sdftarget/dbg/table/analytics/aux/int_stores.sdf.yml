@@ -1,0 +1,99 @@
+table:
+  name: analytics.aux.int_stores
+  description: Intermediate table for stores.
+  dialect: snowflake
+  materialization: view
+  purpose: model
+  dependencies:
+  - analytics.aux.stg_python_ingestor__iowa_liquor_sales
+  depended-on-by:
+  - analytics.marts.invoices
+  columns:
+  - name: store_id
+    description: A unique ID number for each store.
+    datatype: varchar
+    lineage:
+      copy:
+      - analytics.aux.stg_python_ingestor__iowa_liquor_sales.store_id
+  - name: county_id
+    datatype: decimal(38, 0)
+    lineage:
+      copy:
+      - analytics.aux.stg_python_ingestor__iowa_liquor_sales.county_id
+  - name: store_name
+    datatype: varchar
+    lineage:
+      copy:
+      - analytics.aux.stg_python_ingestor__iowa_liquor_sales.store_name
+    forward-lineage:
+      copy:
+      - analytics.marts.invoices.store_name
+  - name: store_brand_name
+    datatype: varchar
+    lineage:
+      modify:
+      - analytics.aux.stg_python_ingestor__iowa_liquor_sales.store_name
+    forward-lineage:
+      copy:
+      - analytics.marts.invoices.store_brand_name
+  - name: store_address
+    datatype: varchar
+    lineage:
+      copy:
+      - analytics.aux.stg_python_ingestor__iowa_liquor_sales.store_address
+  - name: store_city
+    datatype: varchar
+    lineage:
+      copy:
+      - analytics.aux.stg_python_ingestor__iowa_liquor_sales.store_city
+  - name: store_zipcode
+    datatype: decimal(38, 0)
+    lineage:
+      copy:
+      - analytics.aux.stg_python_ingestor__iowa_liquor_sales.store_zipcode
+  - name: store_location_point
+    datatype: geography
+    lineage:
+      copy:
+      - analytics.aux.stg_python_ingestor__iowa_liquor_sales.store_location_point
+  - name: effective_dt
+    datatype: date
+    lineage:
+      copy:
+      - analytics.aux.stg_python_ingestor__iowa_liquor_sales.dt
+  - name: loaded_at
+    datatype: timestamp
+    lineage:
+      copy:
+      - analytics.aux.stg_python_ingestor__iowa_liquor_sales.loaded_at
+  - name: county_ids
+    datatype: array
+    lineage:
+      modify:
+      - analytics.aux.stg_python_ingestor__iowa_liquor_sales.county_id
+  - name: store_names
+    datatype: array
+    lineage:
+      modify:
+      - analytics.aux.stg_python_ingestor__iowa_liquor_sales.store_name
+  - name: store_addresses
+    datatype: array
+    lineage:
+      modify:
+      - analytics.aux.stg_python_ingestor__iowa_liquor_sales.store_address
+  - name: store_cities
+    datatype: array
+    lineage:
+      modify:
+      - analytics.aux.stg_python_ingestor__iowa_liquor_sales.store_city
+  - name: store_zipcodes
+    datatype: array
+    lineage:
+      modify:
+      - analytics.aux.stg_python_ingestor__iowa_liquor_sales.store_zipcode
+  lineage:
+    scan:
+    - analytics.aux.stg_python_ingestor__iowa_liquor_sales.store_id
+  source-locations:
+  - path: target/compiled/sdf/models/analytics/aux/int_stores.sdf.yml
+  - path: target/compiled/sdf/models/analytics/aux/int_stores.sql
