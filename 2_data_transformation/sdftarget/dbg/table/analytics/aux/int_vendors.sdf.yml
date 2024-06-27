@@ -1,0 +1,46 @@
+table:
+  name: analytics.aux.int_vendors
+  description: Intermediate table for vendors.
+  dialect: snowflake
+  materialization: view
+  purpose: model
+  dependencies:
+  - analytics.aux.stg_python_ingestor__iowa_liquor_sales
+  depended-on-by:
+  - analytics.marts.invoices
+  columns:
+  - name: vendor_id
+    description: A unique ID number for each vendor.
+    datatype: decimal(38, 0)
+    lineage:
+      copy:
+      - analytics.aux.stg_python_ingestor__iowa_liquor_sales.vendor_id
+  - name: vendor_name
+    datatype: varchar
+    lineage:
+      copy:
+      - analytics.aux.stg_python_ingestor__iowa_liquor_sales.vendor_name
+    forward-lineage:
+      copy:
+      - analytics.marts.invoices.vendor_name
+  - name: effective_dt
+    datatype: date
+    lineage:
+      copy:
+      - analytics.aux.stg_python_ingestor__iowa_liquor_sales.dt
+  - name: loaded_at
+    datatype: timestamp
+    lineage:
+      copy:
+      - analytics.aux.stg_python_ingestor__iowa_liquor_sales.loaded_at
+  - name: vendor_names
+    datatype: array
+    lineage:
+      modify:
+      - analytics.aux.stg_python_ingestor__iowa_liquor_sales.vendor_name
+  lineage:
+    scan:
+    - analytics.aux.stg_python_ingestor__iowa_liquor_sales.vendor_id
+  source-locations:
+  - path: target/compiled/sdf/models/analytics/aux/int_vendors.sdf.yml
+  - path: target/compiled/sdf/models/analytics/aux/int_vendors.sql
