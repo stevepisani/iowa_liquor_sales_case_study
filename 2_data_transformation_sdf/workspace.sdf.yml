@@ -1,0 +1,30 @@
+workspace:
+  edition: '1.3'
+  name: iowa_liquor
+  includes:
+  - path: models
+    index: schema-table-name
+  integrations:
+  - type: database
+    provider: snowflake
+    sources:
+    - pattern: ingest_database.*.*
+    targets:
+    - pattern: analytics.*.*
+  defaults:
+    environment: dbg
+    dialect: snowflake
+    catalog: analytics
+    schema: aux
+---
+environment:
+  name: dev
+  integrations:
+  - type: database
+    provider: snowflake
+    sources:
+    - pattern: ingest_database.*.*
+      rename-from: ingest_database.${1}.${2}
+    targets:
+    - pattern: analytics.*.*
+      rename-as: analytics_dev.${1}.${2}

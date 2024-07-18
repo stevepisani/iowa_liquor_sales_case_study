@@ -1,0 +1,142 @@
+table:
+  name: ANALYTICS.AUX.INT_STORES
+  description: Intermediate table for stores.
+  dialect: snowflake
+  materialization: view
+  purpose: model
+  dependencies:
+  - ANALYTICS.AUX.STG_PYTHON_INGESTOR__IOWA_LIQUOR_SALES
+  depended-on-by:
+  - ANALYTICS.MARTS.INVOICES
+  - ANALYTICS.MARTS.STORES
+  columns:
+  - name: STORE_ID
+    description: A unique ID number for each store.
+    datatype: varchar
+    lineage:
+      copy:
+      - ANALYTICS.AUX.STG_PYTHON_INGESTOR__IOWA_LIQUOR_SALES.STORE_ID
+    forward-lineage:
+      copy:
+      - ANALYTICS.MARTS.STORES.STORE_ID
+      - ANALYTICS.MARTS.STORES."STORE_ID::1"
+  - name: COUNTY_ID
+    datatype: decimal(38, 0)
+    lineage:
+      copy:
+      - ANALYTICS.AUX.STG_PYTHON_INGESTOR__IOWA_LIQUOR_SALES.COUNTY_ID
+    forward-lineage:
+      copy:
+      - ANALYTICS.MARTS.STORES.COUNTY_ID
+  - name: STORE_NAME
+    datatype: varchar
+    lineage:
+      copy:
+      - ANALYTICS.AUX.STG_PYTHON_INGESTOR__IOWA_LIQUOR_SALES.STORE_NAME
+    forward-lineage:
+      copy:
+      - ANALYTICS.MARTS.INVOICES.STORE_NAME
+      - ANALYTICS.MARTS.STORES.STORE_NAME
+  - name: STORE_BRAND_NAME
+    datatype: varchar
+    lineage:
+      modify:
+      - ANALYTICS.AUX.STG_PYTHON_INGESTOR__IOWA_LIQUOR_SALES.STORE_NAME
+    forward-lineage:
+      copy:
+      - ANALYTICS.MARTS.INVOICES.STORE_BRAND_NAME
+      - ANALYTICS.MARTS.STORES.STORE_BRAND_NAME
+  - name: STORE_ADDRESS
+    datatype: varchar
+    lineage:
+      copy:
+      - ANALYTICS.AUX.STG_PYTHON_INGESTOR__IOWA_LIQUOR_SALES.STORE_ADDRESS
+    forward-lineage:
+      copy:
+      - ANALYTICS.MARTS.STORES.STORE_ADDRESS
+  - name: STORE_CITY
+    datatype: varchar
+    lineage:
+      copy:
+      - ANALYTICS.AUX.STG_PYTHON_INGESTOR__IOWA_LIQUOR_SALES.STORE_CITY
+    forward-lineage:
+      copy:
+      - ANALYTICS.MARTS.STORES.STORE_CITY
+  - name: STORE_ZIPCODE
+    datatype: decimal(38, 0)
+    lineage:
+      copy:
+      - ANALYTICS.AUX.STG_PYTHON_INGESTOR__IOWA_LIQUOR_SALES.STORE_ZIPCODE
+    forward-lineage:
+      copy:
+      - ANALYTICS.MARTS.STORES.STORE_ZIPCODE
+  - name: STORE_LOCATION_POINT
+    datatype: geography
+    lineage:
+      copy:
+      - ANALYTICS.AUX.STG_PYTHON_INGESTOR__IOWA_LIQUOR_SALES.STORE_LOCATION_POINT
+    forward-lineage:
+      copy:
+      - ANALYTICS.MARTS.STORES.STORE_LOCATION_POINT
+  - name: EFFECTIVE_DT
+    datatype: date
+    lineage:
+      copy:
+      - ANALYTICS.AUX.STG_PYTHON_INGESTOR__IOWA_LIQUOR_SALES.DT
+    forward-lineage:
+      copy:
+      - ANALYTICS.MARTS.STORES.EFFECTIVE_DT
+  - name: LOADED_AT
+    datatype: timestamp
+    lineage:
+      copy:
+      - ANALYTICS.AUX.STG_PYTHON_INGESTOR__IOWA_LIQUOR_SALES.LOADED_AT
+    forward-lineage:
+      copy:
+      - ANALYTICS.MARTS.STORES.LOADED_AT
+  - name: COUNTY_IDS
+    datatype: array
+    lineage:
+      modify:
+      - ANALYTICS.AUX.STG_PYTHON_INGESTOR__IOWA_LIQUOR_SALES.COUNTY_ID
+    forward-lineage:
+      copy:
+      - ANALYTICS.MARTS.STORES.COUNTY_IDS
+  - name: STORE_NAMES
+    datatype: array
+    lineage:
+      modify:
+      - ANALYTICS.AUX.STG_PYTHON_INGESTOR__IOWA_LIQUOR_SALES.STORE_NAME
+    forward-lineage:
+      copy:
+      - ANALYTICS.MARTS.STORES.STORE_NAMES
+  - name: STORE_ADDRESSES
+    datatype: array
+    lineage:
+      modify:
+      - ANALYTICS.AUX.STG_PYTHON_INGESTOR__IOWA_LIQUOR_SALES.STORE_ADDRESS
+    forward-lineage:
+      copy:
+      - ANALYTICS.MARTS.STORES.STORE_ADDRESSES
+  - name: STORE_CITIES
+    datatype: array
+    lineage:
+      modify:
+      - ANALYTICS.AUX.STG_PYTHON_INGESTOR__IOWA_LIQUOR_SALES.STORE_CITY
+    forward-lineage:
+      copy:
+      - ANALYTICS.MARTS.STORES.STORE_CITIES
+  - name: STORE_ZIPCODES
+    datatype: array
+    lineage:
+      modify:
+      - ANALYTICS.AUX.STG_PYTHON_INGESTOR__IOWA_LIQUOR_SALES.STORE_ZIPCODE
+    forward-lineage:
+      copy:
+      - ANALYTICS.MARTS.STORES.STORE_ZIPCODES
+  lineage:
+    scan:
+    - ANALYTICS.AUX.STG_PYTHON_INGESTOR__IOWA_LIQUOR_SALES.STORE_ID
+  source-locations:
+  - path: models/aux/int_stores.sdf.yml
+  - path: models/aux/int_stores.sql

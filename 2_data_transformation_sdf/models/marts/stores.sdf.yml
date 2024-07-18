@@ -1,0 +1,8 @@
+table:
+  name: stores
+  description: A denormalized table of stores with all relevant information.
+  materialization: table
+  columns:
+  - name: store_id
+    description: A unique ID number for each store.
+  

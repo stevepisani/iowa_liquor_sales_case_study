@@ -1,0 +1,7 @@
+table:
+  name: int_vendors
+  description: Intermediate table for vendors.
+  columns:
+  - name: vendor_id
+    description: A unique ID number for each vendor.
+  

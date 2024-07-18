@@ -1,0 +1,301 @@
+table:
+  name: ANALYTICS.AUX.STG_PYTHON_INGESTOR__IOWA_LIQUOR_SALES
+  description: This table contains all of the data from the Iowa Liquor Sales dataset with some basic transformations applied.
+  dialect: snowflake
+  materialization: view
+  purpose: model
+  dependencies:
+  - INGEST_DATABASE.IOWA_LIQUOR_SALES.RAW_DATA
+  depended-on-by:
+  - ANALYTICS.AUX.INT_CATEGORIES
+  - ANALYTICS.AUX.INT_COUNTIES
+  - ANALYTICS.AUX.INT_INVOICES
+  - ANALYTICS.AUX.INT_ITEMS
+  - ANALYTICS.AUX.INT_STORES
+  - ANALYTICS.AUX.INT_VENDORS
+  columns:
+  - name: INVOICE_ID
+    description: A unique ID number for each liquor sale invoice.
+    datatype: bigint
+    lineage:
+      modify:
+      - INGEST_DATABASE.IOWA_LIQUOR_SALES.RAW_DATA."Invoice/Item Number"
+    forward-lineage:
+      copy:
+      - ANALYTICS.AUX.INT_INVOICES.INVOICE_ID
+  - name: DT
+    datatype: date
+    lineage:
+      modify:
+      - INGEST_DATABASE.IOWA_LIQUOR_SALES.RAW_DATA."Date"
+    forward-lineage:
+      copy:
+      - ANALYTICS.AUX.INT_CATEGORIES.EFFECTIVE_DT
+      - ANALYTICS.AUX.INT_COUNTIES.EFFECTIVE_DT
+      - ANALYTICS.AUX.INT_INVOICES.INVOICE_DATE
+      - ANALYTICS.AUX.INT_ITEMS.EFFECTIVE_DT
+      - ANALYTICS.AUX.INT_STORES.EFFECTIVE_DT
+      - ANALYTICS.AUX.INT_VENDORS.EFFECTIVE_DT
+  - name: STORE_ID
+    description: A unique ID used to identify the liquor store where the sale occurred.
+    datatype: varchar
+    lineage:
+      modify:
+      - INGEST_DATABASE.IOWA_LIQUOR_SALES.RAW_DATA."Store Number"
+    forward-lineage:
+      copy:
+      - ANALYTICS.AUX.INT_INVOICES.STORE_ID
+      - ANALYTICS.AUX.INT_STORES.STORE_ID
+  - name: STORE_NAME
+    description: The name of the liquor store where the sale occurred.
+    datatype: varchar
+    lineage:
+      modify:
+      - INGEST_DATABASE.IOWA_LIQUOR_SALES.RAW_DATA."Store Name"
+    forward-lineage:
+      copy:
+      - ANALYTICS.AUX.INT_STORES.STORE_NAME
+      modify:
+      - ANALYTICS.AUX.INT_STORES.STORE_BRAND_NAME
+      - ANALYTICS.AUX.INT_STORES.STORE_NAMES
+  - name: STORE_ADDRESS
+    description: The street address of the liquor store where the sale occurred.
+    datatype: varchar
+    lineage:
+      modify:
+      - INGEST_DATABASE.IOWA_LIQUOR_SALES.RAW_DATA."Address"
+    forward-lineage:
+      copy:
+      - ANALYTICS.AUX.INT_STORES.STORE_ADDRESS
+      modify:
+      - ANALYTICS.AUX.INT_STORES.STORE_ADDRESSES
+  - name: STORE_CITY
+    description: The city where the liquor store that made the sale is located.
+    datatype: varchar
+    lineage:
+      modify:
+      - INGEST_DATABASE.IOWA_LIQUOR_SALES.RAW_DATA."City"
+    forward-lineage:
+      copy:
+      - ANALYTICS.AUX.INT_STORES.STORE_CITY
+      modify:
+      - ANALYTICS.AUX.INT_STORES.STORE_CITIES
+  - name: STORE_ZIPCODE
+    description: The ZIP code of the area where the liquor store that made the sale is located.
+    datatype: decimal(38, 0)
+    lineage:
+      copy:
+      - INGEST_DATABASE.IOWA_LIQUOR_SALES.RAW_DATA."Zip Code"
+    forward-lineage:
+      copy:
+      - ANALYTICS.AUX.INT_STORES.STORE_ZIPCODE
+      modify:
+      - ANALYTICS.AUX.INT_STORES.STORE_ZIPCODES
+  - name: STORE_LOCATION_POINT
+    description: The geographic coordinates of the liquor store where the sale occurred.
+    datatype: geography
+    lineage:
+      modify:
+      - INGEST_DATABASE.IOWA_LIQUOR_SALES.RAW_DATA."Store Location"
+    forward-lineage:
+      copy:
+      - ANALYTICS.AUX.INT_STORES.STORE_LOCATION_POINT
+  - name: COUNTY_ID
+    description: A numeric ID used to identify the county where the liquor was sold.
+    datatype: decimal(38, 0)
+    lineage:
+      copy:
+      - INGEST_DATABASE.IOWA_LIQUOR_SALES.RAW_DATA."County Number"
+    forward-lineage:
+      copy:
+      - ANALYTICS.AUX.INT_COUNTIES.COUNTY_ID
+      - ANALYTICS.AUX.INT_INVOICES.COUNTY_ID
+      - ANALYTICS.AUX.INT_STORES.COUNTY_ID
+      modify:
+      - ANALYTICS.AUX.INT_STORES.COUNTY_IDS
+  - name: COUNTY_NAME
+    description: The name of the county where the liquor was sold.
+    datatype: varchar
+    lineage:
+      modify:
+      - INGEST_DATABASE.IOWA_LIQUOR_SALES.RAW_DATA."County"
+    forward-lineage:
+      copy:
+      - ANALYTICS.AUX.INT_COUNTIES.COUNTY_NAME
+      modify:
+      - ANALYTICS.AUX.INT_COUNTIES.COUNTY_NAMES
+  - name: CATEGORY_ID
+    description: A numeric ID used to categorize the type of liquor, such as wine, beer or spirits.
+    datatype: decimal(38, 0)
+    lineage:
+      copy:
+      - INGEST_DATABASE.IOWA_LIQUOR_SALES.RAW_DATA."Category"
+    forward-lineage:
+      copy:
+      - ANALYTICS.AUX.INT_CATEGORIES.CATEGORY_ID
+      - ANALYTICS.AUX.INT_INVOICES.CATEGORY_ID
+      - ANALYTICS.AUX.INT_ITEMS.CATEGORY_ID
+      modify:
+      - ANALYTICS.AUX.INT_CATEGORIES.CATEGORY_IDS
+      - ANALYTICS.AUX.INT_ITEMS.CATEGORY_IDS
+  - name: CATEGORY_NAME
+    description: The name of the liquor category, such as wine, beer or spirits.
+    datatype: varchar
+    lineage:
+      modify:
+      - INGEST_DATABASE.IOWA_LIQUOR_SALES.RAW_DATA."Category Name"
+    forward-lineage:
+      copy:
+      - ANALYTICS.AUX.INT_CATEGORIES.CATEGORY_NAME
+      modify:
+      - ANALYTICS.AUX.INT_CATEGORIES.LIQUOR_TYPE_NAME
+  - name: VENDOR_ID
+    description: A numeric ID used to identify the company that produced or distributed the liquor product sold.
+    datatype: decimal(38, 0)
+    lineage:
+      copy:
+      - INGEST_DATABASE.IOWA_LIQUOR_SALES.RAW_DATA."Vendor Number"
+    forward-lineage:
+      copy:
+      - ANALYTICS.AUX.INT_INVOICES.VENDOR_ID
+      - ANALYTICS.AUX.INT_ITEMS.VENDOR_ID
+      - ANALYTICS.AUX.INT_VENDORS.VENDOR_ID
+      modify:
+      - ANALYTICS.AUX.INT_ITEMS.VENDOR_IDS
+  - name: VENDOR_NAME
+    description: The name of the company that produced or distributed the liquor product sold.
+    datatype: varchar
+    lineage:
+      modify:
+      - INGEST_DATABASE.IOWA_LIQUOR_SALES.RAW_DATA."Vendor Name"
+    forward-lineage:
+      copy:
+      - ANALYTICS.AUX.INT_VENDORS.VENDOR_NAME
+      modify:
+      - ANALYTICS.AUX.INT_VENDORS.VENDOR_NAMES
+  - name: ITEM_ID
+    description: A numeric ID used to identify the specific liquor product sold.
+    datatype: decimal(38, 0)
+    lineage:
+      copy:
+      - INGEST_DATABASE.IOWA_LIQUOR_SALES.RAW_DATA."Item Number"
+    forward-lineage:
+      copy:
+      - ANALYTICS.AUX.INT_INVOICES.ITEM_ID
+      - ANALYTICS.AUX.INT_ITEMS.ITEM_ID
+  - name: ITEM_DESCRIPTION
+    description: A description of the specific liquor product sold, such as 'Cabernet Sauvignon' or 'Vodka'.
+    datatype: varchar
+    lineage:
+      modify:
+      - INGEST_DATABASE.IOWA_LIQUOR_SALES.RAW_DATA."Item Description"
+    forward-lineage:
+      copy:
+      - ANALYTICS.AUX.INT_ITEMS.ITEM_DESCRIPTION
+      modify:
+      - ANALYTICS.AUX.INT_ITEMS.ITEM_DESCRIPTIONS
+  - name: NUMBER_OF_BOTTLES_IN_PACK
+    datatype: decimal(38, 0)
+    lineage:
+      copy:
+      - INGEST_DATABASE.IOWA_LIQUOR_SALES.RAW_DATA."Pack"
+    forward-lineage:
+      copy:
+      - ANALYTICS.AUX.INT_ITEMS.NUMBER_OF_BOTTLES_IN_PACK
+      modify:
+      - ANALYTICS.AUX.INT_ITEMS.NUMBER_OF_BOTTLES_IN_PACKS
+  - name: BOTTLE_VOLUME_ML
+    description: The volume in milliliters of an individual bottle of liquor sold.
+    datatype: decimal(38, 0)
+    lineage:
+      copy:
+      - INGEST_DATABASE.IOWA_LIQUOR_SALES.RAW_DATA."Bottle Volume (ml)"
+    forward-lineage:
+      copy:
+      - ANALYTICS.AUX.INT_ITEMS.BOTTLE_VOLUME_ML
+      modify:
+      - ANALYTICS.AUX.INT_ITEMS.BOTTLE_VOLUME_MLS
+  - name: STATE_BOTTLE_COST
+    description: The wholesale cost per bottle of a particular liquor product paid by the state.
+    datatype: real
+    lineage:
+      copy:
+      - INGEST_DATABASE.IOWA_LIQUOR_SALES.RAW_DATA."State Bottle Cost"
+    forward-lineage:
+      copy:
+      - ANALYTICS.AUX.INT_INVOICES.STATE_BOTTLE_COST
+      - ANALYTICS.AUX.INT_ITEMS.STATE_BOTTLE_COST
+      modify:
+      - ANALYTICS.AUX.INT_INVOICES.COST_IN_DOLLARS
+      - ANALYTICS.AUX.INT_INVOICES.PROFIT_IN_DOLLARS
+      - ANALYTICS.AUX.INT_ITEMS.STATE_BOTTLE_COSTS
+  - name: STATE_BOTTLE_RETAIL
+    description: The recommended retail price per bottle of a particular liquor product set by the state.
+    datatype: real
+    lineage:
+      copy:
+      - INGEST_DATABASE.IOWA_LIQUOR_SALES.RAW_DATA."State Bottle Retail"
+    forward-lineage:
+      copy:
+      - ANALYTICS.AUX.INT_INVOICES.STATE_BOTTLE_RETAIL
+      - ANALYTICS.AUX.INT_ITEMS.STATE_BOTTLE_RETAIL
+      modify:
+      - ANALYTICS.AUX.INT_ITEMS.STATE_BOTTLE_RETAILS
+  - name: NUMBER_OF_BOTTLES_SOLD
+    description: The total number of bottles of a particular liquor product sold.
+    datatype: decimal(38, 0)
+    lineage:
+      copy:
+      - INGEST_DATABASE.IOWA_LIQUOR_SALES.RAW_DATA."Bottles Sold"
+    forward-lineage:
+      copy:
+      - ANALYTICS.AUX.INT_INVOICES.NUMBER_OF_BOTTLES_SOLD
+      modify:
+      - ANALYTICS.AUX.INT_INVOICES.COST_IN_DOLLARS
+      - ANALYTICS.AUX.INT_INVOICES.PROFIT_IN_DOLLARS
+  - name: SALE_IN_DOLLARS
+    description: The total dollar amount of a single liquor sale.
+    datatype: real
+    lineage:
+      copy:
+      - INGEST_DATABASE.IOWA_LIQUOR_SALES.RAW_DATA."Sale (Dollars)"
+    forward-lineage:
+      copy:
+      - ANALYTICS.AUX.INT_INVOICES.SALE_IN_DOLLARS
+      modify:
+      - ANALYTICS.AUX.INT_INVOICES.PROFIT_IN_DOLLARS
+  - name: VOLUME_SOLD_LITERS
+    description: The total volume of liquor sold in liters.
+    datatype: real
+    lineage:
+      copy:
+      - INGEST_DATABASE.IOWA_LIQUOR_SALES.RAW_DATA."Volume Sold (Liters)"
+    forward-lineage:
+      copy:
+      - ANALYTICS.AUX.INT_INVOICES.VOLUME_SOLD_LITERS
+  - name: VOLUME_SOLD_GALLONS
+    description: The total volume of liquor sold in gallons.
+    datatype: real
+    lineage:
+      copy:
+      - INGEST_DATABASE.IOWA_LIQUOR_SALES.RAW_DATA."Volume Sold (Gallons)"
+    forward-lineage:
+      copy:
+      - ANALYTICS.AUX.INT_INVOICES.VOLUME_SOLD_GALLONS
+  - name: LOADED_AT
+    description: The timestamp when the liquor sale data was loaded into the database.
+    datatype: timestamp
+    lineage:
+      copy:
+      - INGEST_DATABASE.IOWA_LIQUOR_SALES.RAW_DATA.LOADED_AT
+    forward-lineage:
+      copy:
+      - ANALYTICS.AUX.INT_CATEGORIES.LOADED_AT
+      - ANALYTICS.AUX.INT_COUNTIES.LOADED_AT
+      - ANALYTICS.AUX.INT_INVOICES.LOADED_AT
+      - ANALYTICS.AUX.INT_ITEMS.LOADED_AT
+      - ANALYTICS.AUX.INT_STORES.LOADED_AT
+      - ANALYTICS.AUX.INT_VENDORS.LOADED_AT
+  source-locations:
+  - path: models/aux/stg_python_ingestor__iowa_liquor_sales.sdf.yml
+  - path: models/aux/stg_python_ingestor__iowa_liquor_sales.sql

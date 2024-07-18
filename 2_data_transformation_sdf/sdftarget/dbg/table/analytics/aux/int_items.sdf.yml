@@ -1,0 +1,112 @@
+table:
+  name: ANALYTICS.AUX.INT_ITEMS
+  description: Intermediate table for items.
+  dialect: snowflake
+  materialization: view
+  purpose: model
+  dependencies:
+  - ANALYTICS.AUX.STG_PYTHON_INGESTOR__IOWA_LIQUOR_SALES
+  depended-on-by:
+  - ANALYTICS.MARTS.INVOICES
+  columns:
+  - name: ITEM_ID
+    description: A unique ID number for each item.
+    datatype: decimal(38, 0)
+    lineage:
+      copy:
+      - ANALYTICS.AUX.STG_PYTHON_INGESTOR__IOWA_LIQUOR_SALES.ITEM_ID
+  - name: CATEGORY_ID
+    datatype: decimal(38, 0)
+    lineage:
+      copy:
+      - ANALYTICS.AUX.STG_PYTHON_INGESTOR__IOWA_LIQUOR_SALES.CATEGORY_ID
+  - name: VENDOR_ID
+    datatype: decimal(38, 0)
+    lineage:
+      copy:
+      - ANALYTICS.AUX.STG_PYTHON_INGESTOR__IOWA_LIQUOR_SALES.VENDOR_ID
+  - name: ITEM_DESCRIPTION
+    datatype: varchar
+    lineage:
+      copy:
+      - ANALYTICS.AUX.STG_PYTHON_INGESTOR__IOWA_LIQUOR_SALES.ITEM_DESCRIPTION
+    forward-lineage:
+      copy:
+      - ANALYTICS.MARTS.INVOICES.ITEM_DESCRIPTION
+  - name: NUMBER_OF_BOTTLES_IN_PACK
+    datatype: decimal(38, 0)
+    lineage:
+      copy:
+      - ANALYTICS.AUX.STG_PYTHON_INGESTOR__IOWA_LIQUOR_SALES.NUMBER_OF_BOTTLES_IN_PACK
+    forward-lineage:
+      copy:
+      - ANALYTICS.MARTS.INVOICES.NUMBER_OF_BOTTLES_IN_PACK
+  - name: BOTTLE_VOLUME_ML
+    datatype: decimal(38, 0)
+    lineage:
+      copy:
+      - ANALYTICS.AUX.STG_PYTHON_INGESTOR__IOWA_LIQUOR_SALES.BOTTLE_VOLUME_ML
+    forward-lineage:
+      copy:
+      - ANALYTICS.MARTS.INVOICES.BOTTLE_VOLUME_ML
+  - name: STATE_BOTTLE_COST
+    datatype: real
+    lineage:
+      copy:
+      - ANALYTICS.AUX.STG_PYTHON_INGESTOR__IOWA_LIQUOR_SALES.STATE_BOTTLE_COST
+  - name: STATE_BOTTLE_RETAIL
+    datatype: real
+    lineage:
+      copy:
+      - ANALYTICS.AUX.STG_PYTHON_INGESTOR__IOWA_LIQUOR_SALES.STATE_BOTTLE_RETAIL
+  - name: EFFECTIVE_DT
+    datatype: date
+    lineage:
+      copy:
+      - ANALYTICS.AUX.STG_PYTHON_INGESTOR__IOWA_LIQUOR_SALES.DT
+  - name: LOADED_AT
+    datatype: timestamp
+    lineage:
+      copy:
+      - ANALYTICS.AUX.STG_PYTHON_INGESTOR__IOWA_LIQUOR_SALES.LOADED_AT
+  - name: CATEGORY_IDS
+    datatype: array
+    lineage:
+      modify:
+      - ANALYTICS.AUX.STG_PYTHON_INGESTOR__IOWA_LIQUOR_SALES.CATEGORY_ID
+  - name: VENDOR_IDS
+    datatype: array
+    lineage:
+      modify:
+      - ANALYTICS.AUX.STG_PYTHON_INGESTOR__IOWA_LIQUOR_SALES.VENDOR_ID
+  - name: ITEM_DESCRIPTIONS
+    datatype: array
+    lineage:
+      modify:
+      - ANALYTICS.AUX.STG_PYTHON_INGESTOR__IOWA_LIQUOR_SALES.ITEM_DESCRIPTION
+  - name: NUMBER_OF_BOTTLES_IN_PACKS
+    datatype: array
+    lineage:
+      modify:
+      - ANALYTICS.AUX.STG_PYTHON_INGESTOR__IOWA_LIQUOR_SALES.NUMBER_OF_BOTTLES_IN_PACK
+  - name: BOTTLE_VOLUME_MLS
+    datatype: array
+    lineage:
+      modify:
+      - ANALYTICS.AUX.STG_PYTHON_INGESTOR__IOWA_LIQUOR_SALES.BOTTLE_VOLUME_ML
+  - name: STATE_BOTTLE_COSTS
+    datatype: array
+    lineage:
+      modify:
+      - ANALYTICS.AUX.STG_PYTHON_INGESTOR__IOWA_LIQUOR_SALES.STATE_BOTTLE_COST
+  - name: STATE_BOTTLE_RETAILS
+    datatype: array
+    lineage:
+      modify:
+      - ANALYTICS.AUX.STG_PYTHON_INGESTOR__IOWA_LIQUOR_SALES.STATE_BOTTLE_RETAIL
+  lineage:
+    scan:
+    - ANALYTICS.AUX.STG_PYTHON_INGESTOR__IOWA_LIQUOR_SALES.ITEM_ID
+  source-locations:
+  - path: models/aux/int_items.sdf.yml
+  - path: models/aux/int_items.sql

@@ -1,0 +1,137 @@
+table:
+  name: ANALYTICS.MARTS.INVOICES
+  description: A denormalized table of invoices with all relevant information.
+  dialect: snowflake
+  materialization: table
+  purpose: model
+  dependencies:
+  - ANALYTICS.AUX.INT_CATEGORIES
+  - ANALYTICS.AUX.INT_INVOICES
+  - ANALYTICS.AUX.INT_ITEMS
+  - ANALYTICS.AUX.INT_STORES
+  - ANALYTICS.AUX.INT_VENDORS
+  columns:
+  - name: INVOICE_ID
+    description: A unique ID number for each invoice.
+    datatype: bigint
+    lineage:
+      copy:
+      - ANALYTICS.AUX.INT_INVOICES.INVOICE_ID
+  - name: INVOICE_DATE
+    datatype: date
+    lineage:
+      copy:
+      - ANALYTICS.AUX.INT_INVOICES.INVOICE_DATE
+  - name: STATE_BOTTLE_COST
+    datatype: real
+    lineage:
+      copy:
+      - ANALYTICS.AUX.INT_INVOICES.STATE_BOTTLE_COST
+  - name: STATE_BOTTLE_RETAIL
+    datatype: real
+    lineage:
+      copy:
+      - ANALYTICS.AUX.INT_INVOICES.STATE_BOTTLE_RETAIL
+  - name: NUMBER_OF_BOTTLES_SOLD
+    datatype: decimal(38, 0)
+    lineage:
+      copy:
+      - ANALYTICS.AUX.INT_INVOICES.NUMBER_OF_BOTTLES_SOLD
+  - name: SALE_IN_DOLLARS
+    datatype: real
+    lineage:
+      copy:
+      - ANALYTICS.AUX.INT_INVOICES.SALE_IN_DOLLARS
+  - name: COST_IN_DOLLARS
+    datatype: real
+    lineage:
+      copy:
+      - ANALYTICS.AUX.INT_INVOICES.COST_IN_DOLLARS
+  - name: PROFIT_IN_DOLLARS
+    datatype: real
+    lineage:
+      copy:
+      - ANALYTICS.AUX.INT_INVOICES.PROFIT_IN_DOLLARS
+  - name: VOLUME_SOLD_LITERS
+    datatype: real
+    lineage:
+      copy:
+      - ANALYTICS.AUX.INT_INVOICES.VOLUME_SOLD_LITERS
+  - name: VOLUME_SOLD_GALLONS
+    datatype: real
+    lineage:
+      copy:
+      - ANALYTICS.AUX.INT_INVOICES.VOLUME_SOLD_GALLONS
+  - name: STORE_ID
+    datatype: varchar
+    lineage:
+      copy:
+      - ANALYTICS.AUX.INT_INVOICES.STORE_ID
+  - name: STORE_NAME
+    datatype: varchar
+    lineage:
+      copy:
+      - ANALYTICS.AUX.INT_STORES.STORE_NAME
+  - name: STORE_BRAND_NAME
+    datatype: varchar
+    lineage:
+      copy:
+      - ANALYTICS.AUX.INT_STORES.STORE_BRAND_NAME
+  - name: CATEGORY_ID
+    datatype: decimal(38, 0)
+    lineage:
+      copy:
+      - ANALYTICS.AUX.INT_INVOICES.CATEGORY_ID
+  - name: CATEGORY_NAME
+    datatype: varchar
+    lineage:
+      copy:
+      - ANALYTICS.AUX.INT_CATEGORIES.CATEGORY_NAME
+  - name: LIQUOR_TYPE_NAME
+    datatype: varchar
+    lineage:
+      copy:
+      - ANALYTICS.AUX.INT_CATEGORIES.LIQUOR_TYPE_NAME
+  - name: VENDOR_ID
+    datatype: decimal(38, 0)
+    lineage:
+      copy:
+      - ANALYTICS.AUX.INT_INVOICES.VENDOR_ID
+  - name: VENDOR_NAME
+    datatype: varchar
+    lineage:
+      copy:
+      - ANALYTICS.AUX.INT_VENDORS.VENDOR_NAME
+  - name: ITEM_ID
+    datatype: decimal(38, 0)
+    lineage:
+      copy:
+      - ANALYTICS.AUX.INT_INVOICES.ITEM_ID
+  - name: ITEM_DESCRIPTION
+    datatype: varchar
+    lineage:
+      copy:
+      - ANALYTICS.AUX.INT_ITEMS.ITEM_DESCRIPTION
+  - name: NUMBER_OF_BOTTLES_IN_PACK
+    datatype: decimal(38, 0)
+    lineage:
+      copy:
+      - ANALYTICS.AUX.INT_ITEMS.NUMBER_OF_BOTTLES_IN_PACK
+  - name: BOTTLE_VOLUME_ML
+    datatype: decimal(38, 0)
+    lineage:
+      copy:
+      - ANALYTICS.AUX.INT_ITEMS.BOTTLE_VOLUME_ML
+  lineage:
+    scan:
+    - ANALYTICS.AUX.INT_CATEGORIES.CATEGORY_ID
+    - ANALYTICS.AUX.INT_INVOICES.CATEGORY_ID
+    - ANALYTICS.AUX.INT_INVOICES.ITEM_ID
+    - ANALYTICS.AUX.INT_INVOICES.STORE_ID
+    - ANALYTICS.AUX.INT_INVOICES.VENDOR_ID
+    - ANALYTICS.AUX.INT_ITEMS.ITEM_ID
+    - ANALYTICS.AUX.INT_STORES.STORE_ID
+    - ANALYTICS.AUX.INT_VENDORS.VENDOR_ID
+  source-locations:
+  - path: models/marts/invoices.sdf.yml
+  - path: models/marts/invoices.sql

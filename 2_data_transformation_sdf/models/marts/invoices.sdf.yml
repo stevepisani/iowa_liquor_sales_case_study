@@ -1,0 +1,8 @@
+table:
+  name: invoices
+  description: A denormalized table of invoices with all relevant information.
+  materialization: table
+  columns:
+  - name: invoice_id
+    description: A unique ID number for each invoice.
+  

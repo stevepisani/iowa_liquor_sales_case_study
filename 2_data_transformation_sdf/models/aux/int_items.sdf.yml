@@ -1,0 +1,7 @@
+table:
+  name: int_items
+  description: Intermediate table for items.
+  columns:
+  - name: item_id
+    description: A unique ID number for each item.
+  

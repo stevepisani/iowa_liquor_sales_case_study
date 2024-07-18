@@ -1,0 +1,269 @@
+{
+  "contents": {
+    "credentials": "ef4f2bb2fc9d08e46e38097927d0ac2f",
+    "cli_vars": "99914b932bd37a50b983c5e7c90ae93b",
+    "env_vars": "d751713988987e9331980363e24189ce"
+  },
+  "prelude": [
+    {
+      "file": "workspace.sdf.yml",
+      "mtime": "2024-07-16T21:01:36.674352159Z"
+    },
+    {
+      "file": "target/compiled/sdf/models/analytics/aux/int_vendors.sdf.yml",
+      "mtime": "2024-07-16T20:53:40.743011012Z"
+    },
+    {
+      "file": "target/compiled/sdf/models/analytics/aux/int_categories.sdf.yml",
+      "mtime": "2024-07-16T20:53:40.754381173Z"
+    },
+    {
+      "file": "target/compiled/sdf/models/analytics/marts/invoices.sdf.yml",
+      "mtime": "2024-07-16T20:53:40.748971489Z"
+    },
+    {
+      "file": "target/compiled/sdf/models/analytics/aux/int_counties.sdf.yml",
+      "mtime": "2024-07-16T20:53:40.752392500Z"
+    },
+    {
+      "file": "target/compiled/sdf/models/analytics/aux/stg_python_ingestor__iowa_liquor_sales.sdf.yml",
+      "mtime": "2024-07-16T20:55:18.774527363Z"
+    },
+    {
+      "file": "target/compiled/sdf/models/analytics/aux/int_invoices.sdf.yml",
+      "mtime": "2024-07-16T20:53:40.748396946Z"
+    },
+    {
+      "file": "target/compiled/sdf/models/analytics/aux/int_stores.sdf.yml",
+      "mtime": "2024-07-16T20:53:40.749826117Z"
+    },
+    {
+      "file": "target/compiled/sdf/models/analytics/aux/int_items.sdf.yml",
+      "mtime": "2024-07-16T20:53:40.750772203Z"
+    },
+    {
+      "file": "sdftarget/dbg/.lib/sdf_test/workspace.sdf.yml",
+      "mtime": "2024-07-16T21:10:02.127479856Z"
+    },
+    {
+      "file": "sdftarget/dbg/.lib/sdf_utils/workspace.sdf.yml",
+      "mtime": "2024-07-16T21:10:02.129185111Z"
+    },
+    {
+      "file": "sdftarget/dbg/.lib/sdf_mat/workspace.sdf.yml",
+      "mtime": "2024-07-16T21:10:02.126781437Z"
+    },
+    {
+      "file": "target/compiled/sdf/models/analytics/aux/int_vendors.sdf.yml",
+      "mtime": "2024-07-16T20:53:40.743011012Z"
+    },
+    {
+      "file": "target/compiled/sdf/models/analytics/aux/int_categories.sdf.yml",
+      "mtime": "2024-07-16T20:53:40.754381173Z"
+    },
+    {
+      "file": "target/compiled/sdf/models/analytics/marts/invoices.sdf.yml",
+      "mtime": "2024-07-16T20:53:40.748971489Z"
+    },
+    {
+      "file": "target/compiled/sdf/models/analytics/aux/int_counties.sdf.yml",
+      "mtime": "2024-07-16T20:53:40.752392500Z"
+    },
+    {
+      "file": "target/compiled/sdf/models/analytics/aux/stg_python_ingestor__iowa_liquor_sales.sdf.yml",
+      "mtime": "2024-07-16T20:55:18.774527363Z"
+    },
+    {
+      "file": "target/compiled/sdf/models/analytics/aux/int_invoices.sdf.yml",
+      "mtime": "2024-07-16T20:53:40.748396946Z"
+    },
+    {
+      "file": "target/compiled/sdf/models/analytics/aux/int_stores.sdf.yml",
+      "mtime": "2024-07-16T20:53:40.749826117Z"
+    },
+    {
+      "file": "target/compiled/sdf/models/analytics/aux/int_items.sdf.yml",
+      "mtime": "2024-07-16T20:53:40.750772203Z"
+    },
+    {
+      "file": "sdftarget/dbg/.lib/sdf_test/macros/test.jinja",
+      "mtime": "2024-07-16T21:10:02.127229938Z"
+    },
+    {
+      "file": "sdftarget/dbg/.lib/sdf_utils/macros/generate_date_values.jinja",
+      "mtime": "2024-07-16T21:10:02.128168983Z"
+    },
+    {
+      "file": "sdftarget/dbg/.lib/sdf_utils/macros/group_by.jinja",
+      "mtime": "2024-07-16T21:10:02.129080569Z"
+    },
+    {
+      "file": "sdftarget/dbg/.lib/sdf_utils/macros/generate_integer_values.jinja",
+      "mtime": "2024-07-16T21:10:02.128608693Z"
+    },
+    {
+      "file": "sdftarget/dbg/.lib/sdf_utils/macros/generate_surrogate_key.jinja",
+      "mtime": "2024-07-16T21:10:02.128825777Z"
+    },
+    {
+      "file": "sdftarget/dbg/.lib/sdf_mat/macros/materialize.jinja",
+      "mtime": "2024-07-16T21:12:47.108448988Z"
+    }
+  ],
+  "deps": [
+    {
+      "target": "INGEST_DATABASE.IOWA_LIQUOR_SALES.RAW_DATA__SF__",
+      "deps": []
+    },
+    {
+      "target": "ANALYTICS.AUX.STG_PYTHON_INGESTOR__IOWA_LIQUOR_SALES__SF__",
+      "deps": [
+        "INGEST_DATABASE.IOWA_LIQUOR_SALES.RAW_DATA__SF__"
+      ]
+    },
+    {
+      "target": "ANALYTICS.AUX.INT_CATEGORIES__SF__",
+      "deps": [
+        "ANALYTICS.AUX.STG_PYTHON_INGESTOR__IOWA_LIQUOR_SALES__SF__"
+      ]
+    },
+    {
+      "target": "ANALYTICS.AUX.INT_COUNTIES__SF__",
+      "deps": [
+        "ANALYTICS.AUX.STG_PYTHON_INGESTOR__IOWA_LIQUOR_SALES__SF__"
+      ]
+    },
+    {
+      "target": "ANALYTICS.AUX.INT_INVOICES__SF__",
+      "deps": [
+        "ANALYTICS.AUX.STG_PYTHON_INGESTOR__IOWA_LIQUOR_SALES__SF__"
+      ]
+    },
+    {
+      "target": "ANALYTICS.AUX.INT_ITEMS__SF__",
+      "deps": [
+        "ANALYTICS.AUX.STG_PYTHON_INGESTOR__IOWA_LIQUOR_SALES__SF__"
+      ]
+    },
+    {
+      "target": "ANALYTICS.AUX.INT_STORES__SF__",
+      "deps": [
+        "ANALYTICS.AUX.STG_PYTHON_INGESTOR__IOWA_LIQUOR_SALES__SF__"
+      ]
+    },
+    {
+      "target": "ANALYTICS.AUX.INT_VENDORS__SF__",
+      "deps": [
+        "ANALYTICS.AUX.STG_PYTHON_INGESTOR__IOWA_LIQUOR_SALES__SF__"
+      ]
+    },
+    {
+      "target": "ANALYTICS.MARTS.INVOICES__SF__",
+      "deps": [
+        "ANALYTICS.AUX.INT_CATEGORIES__SF__",
+        "ANALYTICS.AUX.INT_INVOICES__SF__",
+        "ANALYTICS.AUX.INT_ITEMS__SF__",
+        "ANALYTICS.AUX.INT_STORES__SF__",
+        "ANALYTICS.AUX.INT_VENDORS__SF__"
+      ]
+    }
+  ],
+  "source_files": {
+    "values": {
+      "ANALYTICS.AUX.INT_COUNTIES__SF__": [
+        {
+          "file": "target/compiled/sdf/models/analytics/aux/int_counties.sdf.yml",
+          "mtime": "2024-07-16T20:53:40.752392500Z"
+        },
+        {
+          "file": "target/compiled/sdf/models/analytics/aux/int_counties.sql",
+          "mtime": "2024-07-16T20:51:47.615886766Z"
+        }
+      ],
+      "ANALYTICS.AUX.INT_VENDORS__SF__": [
+        {
+          "file": "target/compiled/sdf/models/analytics/aux/int_vendors.sdf.yml",
+          "mtime": "2024-07-16T20:53:40.743011012Z"
+        },
+        {
+          "file": "target/compiled/sdf/models/analytics/aux/int_vendors.sql",
+          "mtime": "2024-07-16T20:51:47.618774525Z"
+        }
+      ],
+      "ANALYTICS.AUX.INT_ITEMS__SF__": [
+        {
+          "file": "target/compiled/sdf/models/analytics/aux/int_items.sdf.yml",
+          "mtime": "2024-07-16T20:53:40.750772203Z"
+        },
+        {
+          "file": "target/compiled/sdf/models/analytics/aux/int_items.sql",
+          "mtime": "2024-07-16T20:51:47.615037221Z"
+        }
+      ],
+      "ANALYTICS.AUX.INT_STORES__SF__": [
+        {
+          "file": "target/compiled/sdf/models/analytics/aux/int_stores.sdf.yml",
+          "mtime": "2024-07-16T20:53:40.749826117Z"
+        },
+        {
+          "file": "target/compiled/sdf/models/analytics/aux/int_stores.sql",
+          "mtime": "2024-07-16T20:51:47.617428354Z"
+        }
+      ],
+      "ANALYTICS.AUX.STG_PYTHON_INGESTOR__IOWA_LIQUOR_SALES__SF__": [
+        {
+          "file": "target/compiled/sdf/models/analytics/aux/stg_python_ingestor__iowa_liquor_sales.sdf.yml",
+          "mtime": "2024-07-16T20:55:18.774527363Z"
+        },
+        {
+          "file": "target/compiled/sdf/models/analytics/aux/stg_python_ingestor__iowa_liquor_sales.sql",
+          "mtime": "2024-07-16T20:51:47.456417094Z"
+        }
+      ],
+      "INGEST_DATABASE.IOWA_LIQUOR_SALES.RAW_DATA__SF__": [
+        {
+          "file": "sdftarget/dbg/table/ingest_database/iowa_liquor_sales/raw_data.sdf.yml",
+          "mtime": "2024-07-16T21:12:56.830820214Z",
+          "is_remote_origin": true
+        },
+        {
+          "file": "workspace.sdf.yml",
+          "mtime": "2024-07-16T21:01:36.674352159Z"
+        }
+      ],
+      "ANALYTICS.AUX.INT_CATEGORIES__SF__": [
+        {
+          "file": "target/compiled/sdf/models/analytics/aux/int_categories.sdf.yml",
+          "mtime": "2024-07-16T20:53:40.754381173Z"
+        },
+        {
+          "file": "target/compiled/sdf/models/analytics/aux/int_categories.sql",
+          "mtime": "2024-07-16T20:51:47.612919881Z"
+        }
+      ],
+      "ANALYTICS.MARTS.INVOICES__SF__": [
+        {
+          "file": "target/compiled/sdf/models/analytics/marts/invoices.sdf.yml",
+          "mtime": "2024-07-16T20:53:40.748971489Z"
+        },
+        {
+          "file": "target/compiled/sdf/models/analytics/marts/invoices.sql",
+          "mtime": "2024-07-16T20:51:47.894840607Z"
+        }
+      ],
+      "ANALYTICS.AUX.INT_INVOICES__SF__": [
+        {
+          "file": "target/compiled/sdf/models/analytics/aux/int_invoices.sdf.yml",
+          "mtime": "2024-07-16T20:53:40.748396946Z"
+        },
+        {
+          "file": "target/compiled/sdf/models/analytics/aux/int_invoices.sql",
+          "mtime": "2024-07-16T20:51:47.614699845Z"
+        }
+      ]
+    }
+  },
+  "incomplete_source_files": {
+    "values": []
+  }
+}

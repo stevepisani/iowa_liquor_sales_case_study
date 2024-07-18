@@ -1,0 +1,7 @@
+table:
+  name: int_invoices
+  description: Intermediate table for invoices.
+  columns:
+  - name: invoice_id
+    description: A unique ID number for each invoice.
+  

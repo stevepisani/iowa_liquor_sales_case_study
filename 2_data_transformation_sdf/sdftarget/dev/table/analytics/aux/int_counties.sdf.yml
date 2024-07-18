@@ -1,0 +1,41 @@
+table:
+  name: ANALYTICS.AUX.INT_COUNTIES
+  description: Intermediate table for counties.
+  dialect: snowflake
+  materialization: view
+  purpose: model
+  dependencies:
+  - ANALYTICS.AUX.STG_PYTHON_INGESTOR__IOWA_LIQUOR_SALES
+  columns:
+  - name: COUNTY_ID
+    description: A unique ID number for each county.
+    datatype: decimal(38, 0)
+    lineage:
+      copy:
+      - ANALYTICS.AUX.STG_PYTHON_INGESTOR__IOWA_LIQUOR_SALES.COUNTY_ID
+  - name: COUNTY_NAME
+    datatype: varchar
+    lineage:
+      copy:
+      - ANALYTICS.AUX.STG_PYTHON_INGESTOR__IOWA_LIQUOR_SALES.COUNTY_NAME
+  - name: EFFECTIVE_DT
+    datatype: date
+    lineage:
+      copy:
+      - ANALYTICS.AUX.STG_PYTHON_INGESTOR__IOWA_LIQUOR_SALES.DT
+  - name: LOADED_AT
+    datatype: timestamp
+    lineage:
+      copy:
+      - ANALYTICS.AUX.STG_PYTHON_INGESTOR__IOWA_LIQUOR_SALES.LOADED_AT
+  - name: COUNTY_NAMES
+    datatype: array
+    lineage:
+      modify:
+      - ANALYTICS.AUX.STG_PYTHON_INGESTOR__IOWA_LIQUOR_SALES.COUNTY_NAME
+  lineage:
+    scan:
+    - ANALYTICS.AUX.STG_PYTHON_INGESTOR__IOWA_LIQUOR_SALES.COUNTY_ID
+  source-locations:
+  - path: models/aux/int_counties.sdf.yml
+  - path: models/aux/int_counties.sql

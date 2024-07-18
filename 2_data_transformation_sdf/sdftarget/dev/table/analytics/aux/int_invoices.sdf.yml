@@ -1,0 +1,140 @@
+table:
+  name: ANALYTICS.AUX.INT_INVOICES
+  description: Intermediate table for invoices.
+  dialect: snowflake
+  materialization: view
+  purpose: model
+  dependencies:
+  - ANALYTICS.AUX.STG_PYTHON_INGESTOR__IOWA_LIQUOR_SALES
+  depended-on-by:
+  - ANALYTICS.MARTS.INVOICES
+  columns:
+  - name: INVOICE_ID
+    description: A unique ID number for each invoice.
+    datatype: bigint
+    lineage:
+      copy:
+      - ANALYTICS.AUX.STG_PYTHON_INGESTOR__IOWA_LIQUOR_SALES.INVOICE_ID
+    forward-lineage:
+      copy:
+      - ANALYTICS.MARTS.INVOICES.INVOICE_ID
+  - name: STORE_ID
+    datatype: varchar
+    lineage:
+      copy:
+      - ANALYTICS.AUX.STG_PYTHON_INGESTOR__IOWA_LIQUOR_SALES.STORE_ID
+    forward-lineage:
+      copy:
+      - ANALYTICS.MARTS.INVOICES.STORE_ID
+  - name: COUNTY_ID
+    datatype: decimal(38, 0)
+    lineage:
+      copy:
+      - ANALYTICS.AUX.STG_PYTHON_INGESTOR__IOWA_LIQUOR_SALES.COUNTY_ID
+  - name: CATEGORY_ID
+    datatype: decimal(38, 0)
+    lineage:
+      copy:
+      - ANALYTICS.AUX.STG_PYTHON_INGESTOR__IOWA_LIQUOR_SALES.CATEGORY_ID
+    forward-lineage:
+      copy:
+      - ANALYTICS.MARTS.INVOICES.CATEGORY_ID
+  - name: VENDOR_ID
+    datatype: decimal(38, 0)
+    lineage:
+      copy:
+      - ANALYTICS.AUX.STG_PYTHON_INGESTOR__IOWA_LIQUOR_SALES.VENDOR_ID
+    forward-lineage:
+      copy:
+      - ANALYTICS.MARTS.INVOICES.VENDOR_ID
+  - name: ITEM_ID
+    datatype: decimal(38, 0)
+    lineage:
+      copy:
+      - ANALYTICS.AUX.STG_PYTHON_INGESTOR__IOWA_LIQUOR_SALES.ITEM_ID
+    forward-lineage:
+      copy:
+      - ANALYTICS.MARTS.INVOICES.ITEM_ID
+  - name: INVOICE_DATE
+    datatype: date
+    lineage:
+      copy:
+      - ANALYTICS.AUX.STG_PYTHON_INGESTOR__IOWA_LIQUOR_SALES.DT
+    forward-lineage:
+      copy:
+      - ANALYTICS.MARTS.INVOICES.INVOICE_DATE
+  - name: STATE_BOTTLE_COST
+    datatype: real
+    lineage:
+      copy:
+      - ANALYTICS.AUX.STG_PYTHON_INGESTOR__IOWA_LIQUOR_SALES.STATE_BOTTLE_COST
+    forward-lineage:
+      copy:
+      - ANALYTICS.MARTS.INVOICES.STATE_BOTTLE_COST
+  - name: STATE_BOTTLE_RETAIL
+    datatype: real
+    lineage:
+      copy:
+      - ANALYTICS.AUX.STG_PYTHON_INGESTOR__IOWA_LIQUOR_SALES.STATE_BOTTLE_RETAIL
+    forward-lineage:
+      copy:
+      - ANALYTICS.MARTS.INVOICES.STATE_BOTTLE_RETAIL
+  - name: NUMBER_OF_BOTTLES_SOLD
+    datatype: decimal(38, 0)
+    lineage:
+      copy:
+      - ANALYTICS.AUX.STG_PYTHON_INGESTOR__IOWA_LIQUOR_SALES.NUMBER_OF_BOTTLES_SOLD
+    forward-lineage:
+      copy:
+      - ANALYTICS.MARTS.INVOICES.NUMBER_OF_BOTTLES_SOLD
+  - name: SALE_IN_DOLLARS
+    datatype: real
+    lineage:
+      copy:
+      - ANALYTICS.AUX.STG_PYTHON_INGESTOR__IOWA_LIQUOR_SALES.SALE_IN_DOLLARS
+    forward-lineage:
+      copy:
+      - ANALYTICS.MARTS.INVOICES.SALE_IN_DOLLARS
+  - name: COST_IN_DOLLARS
+    datatype: real
+    lineage:
+      modify:
+      - ANALYTICS.AUX.STG_PYTHON_INGESTOR__IOWA_LIQUOR_SALES.NUMBER_OF_BOTTLES_SOLD
+      - ANALYTICS.AUX.STG_PYTHON_INGESTOR__IOWA_LIQUOR_SALES.STATE_BOTTLE_COST
+    forward-lineage:
+      copy:
+      - ANALYTICS.MARTS.INVOICES.COST_IN_DOLLARS
+  - name: PROFIT_IN_DOLLARS
+    datatype: real
+    lineage:
+      modify:
+      - ANALYTICS.AUX.STG_PYTHON_INGESTOR__IOWA_LIQUOR_SALES.NUMBER_OF_BOTTLES_SOLD
+      - ANALYTICS.AUX.STG_PYTHON_INGESTOR__IOWA_LIQUOR_SALES.SALE_IN_DOLLARS
+      - ANALYTICS.AUX.STG_PYTHON_INGESTOR__IOWA_LIQUOR_SALES.STATE_BOTTLE_COST
+    forward-lineage:
+      copy:
+      - ANALYTICS.MARTS.INVOICES.PROFIT_IN_DOLLARS
+  - name: VOLUME_SOLD_LITERS
+    datatype: real
+    lineage:
+      copy:
+      - ANALYTICS.AUX.STG_PYTHON_INGESTOR__IOWA_LIQUOR_SALES.VOLUME_SOLD_LITERS
+    forward-lineage:
+      copy:
+      - ANALYTICS.MARTS.INVOICES.VOLUME_SOLD_LITERS
+  - name: VOLUME_SOLD_GALLONS
+    datatype: real
+    lineage:
+      copy:
+      - ANALYTICS.AUX.STG_PYTHON_INGESTOR__IOWA_LIQUOR_SALES.VOLUME_SOLD_GALLONS
+    forward-lineage:
+      copy:
+      - ANALYTICS.MARTS.INVOICES.VOLUME_SOLD_GALLONS
+  - name: LOADED_AT
+    datatype: timestamp
+    lineage:
+      copy:
+      - ANALYTICS.AUX.STG_PYTHON_INGESTOR__IOWA_LIQUOR_SALES.LOADED_AT
+  source-locations:
+  - path: models/aux/int_invoices.sdf.yml
+  - path: models/aux/int_invoices.sql

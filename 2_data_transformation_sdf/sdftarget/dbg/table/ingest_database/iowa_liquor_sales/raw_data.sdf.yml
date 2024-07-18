@@ -1,0 +1,59 @@
+table:
+  name: INGEST_DATABASE.IOWA_LIQUOR_SALES.RAW_DATA
+  dialect: snowflake
+  materialization: table
+  purpose: model
+  origin: remote
+  columns:
+  - name: '"Invoice/Item Number"'
+    datatype: varchar
+  - name: '"Date"'
+    datatype: varchar
+  - name: '"Store Number"'
+    datatype: decimal(38, 0)
+  - name: '"Store Name"'
+    datatype: varchar
+  - name: '"Address"'
+    datatype: varchar
+  - name: '"City"'
+    datatype: varchar
+  - name: '"Zip Code"'
+    datatype: decimal(38, 0)
+  - name: '"Store Location"'
+    datatype: varchar
+  - name: '"County Number"'
+    datatype: decimal(38, 0)
+  - name: '"County"'
+    datatype: varchar
+  - name: '"Category"'
+    datatype: decimal(38, 0)
+  - name: '"Category Name"'
+    datatype: varchar
+  - name: '"Vendor Number"'
+    datatype: decimal(38, 0)
+  - name: '"Vendor Name"'
+    datatype: varchar
+  - name: '"Item Number"'
+    datatype: decimal(38, 0)
+  - name: '"Item Description"'
+    datatype: varchar
+  - name: '"Pack"'
+    datatype: decimal(38, 0)
+  - name: '"Bottle Volume (ml)"'
+    datatype: decimal(38, 0)
+  - name: '"State Bottle Cost"'
+    datatype: real
+  - name: '"State Bottle Retail"'
+    datatype: real
+  - name: '"Bottles Sold"'
+    datatype: decimal(38, 0)
+  - name: '"Sale (Dollars)"'
+    datatype: real
+  - name: '"Volume Sold (Liters)"'
+    datatype: real
+  - name: '"Volume Sold (Gallons)"'
+    datatype: real
+  - name: LOADED_AT
+    datatype: timestamp
+  source-locations:
+  - path: workspace.sdf.yml

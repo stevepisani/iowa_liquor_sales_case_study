@@ -1,0 +1,7 @@
+table:
+  name: int_categories
+  description: Intermediate table for categories.
+  columns:
+  - name: category_id
+    description: A unique ID number for each category.
+  

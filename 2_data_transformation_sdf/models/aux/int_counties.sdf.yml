@@ -1,0 +1,7 @@
+table:
+  name: int_counties
+  description: Intermediate table for counties.
+  columns:
+  - name: county_id
+    description: A unique ID number for each county.
+  

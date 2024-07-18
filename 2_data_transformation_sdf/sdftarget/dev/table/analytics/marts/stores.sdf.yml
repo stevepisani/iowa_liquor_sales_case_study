@@ -1,0 +1,93 @@
+table:
+  name: ANALYTICS.MARTS.STORES
+  description: A denormalized table of stores with all relevant information.
+  dialect: snowflake
+  materialization: table
+  purpose: model
+  dependencies:
+  - ANALYTICS.AUX.INT_STORES
+  columns:
+  - name: STORE_ID
+    description: A unique ID number for each store.
+    datatype: varchar
+    lineage:
+      copy:
+      - ANALYTICS.AUX.INT_STORES.STORE_ID
+  - name: COUNTY_ID
+    datatype: decimal(38, 0)
+    lineage:
+      copy:
+      - ANALYTICS.AUX.INT_STORES.COUNTY_ID
+  - name: STORE_NAME
+    datatype: varchar
+    lineage:
+      copy:
+      - ANALYTICS.AUX.INT_STORES.STORE_NAME
+  - name: STORE_BRAND_NAME
+    datatype: varchar
+    lineage:
+      copy:
+      - ANALYTICS.AUX.INT_STORES.STORE_BRAND_NAME
+  - name: STORE_ADDRESS
+    datatype: varchar
+    lineage:
+      copy:
+      - ANALYTICS.AUX.INT_STORES.STORE_ADDRESS
+  - name: STORE_CITY
+    datatype: varchar
+    lineage:
+      copy:
+      - ANALYTICS.AUX.INT_STORES.STORE_CITY
+  - name: STORE_ZIPCODE
+    datatype: decimal(38, 0)
+    lineage:
+      copy:
+      - ANALYTICS.AUX.INT_STORES.STORE_ZIPCODE
+  - name: STORE_LOCATION_POINT
+    datatype: geography
+    lineage:
+      copy:
+      - ANALYTICS.AUX.INT_STORES.STORE_LOCATION_POINT
+  - name: '"STORE_ID::1"'
+    datatype: varchar
+    lineage:
+      copy:
+      - ANALYTICS.AUX.INT_STORES.STORE_ID
+  - name: COUNTY_IDS
+    datatype: array
+    lineage:
+      copy:
+      - ANALYTICS.AUX.INT_STORES.COUNTY_IDS
+  - name: STORE_NAMES
+    datatype: array
+    lineage:
+      copy:
+      - ANALYTICS.AUX.INT_STORES.STORE_NAMES
+  - name: STORE_ADDRESSES
+    datatype: array
+    lineage:
+      copy:
+      - ANALYTICS.AUX.INT_STORES.STORE_ADDRESSES
+  - name: STORE_CITIES
+    datatype: array
+    lineage:
+      copy:
+      - ANALYTICS.AUX.INT_STORES.STORE_CITIES
+  - name: STORE_ZIPCODES
+    datatype: array
+    lineage:
+      copy:
+      - ANALYTICS.AUX.INT_STORES.STORE_ZIPCODES
+  - name: EFFECTIVE_DT
+    datatype: date
+    lineage:
+      copy:
+      - ANALYTICS.AUX.INT_STORES.EFFECTIVE_DT
+  - name: LOADED_AT
+    datatype: timestamp
+    lineage:
+      copy:
+      - ANALYTICS.AUX.INT_STORES.LOADED_AT
+  source-locations:
+  - path: models/marts/stores.sdf.yml
+  - path: models/marts/stores.sql

@@ -1,0 +1,51 @@
+table:
+  name: stg_python_ingestor__iowa_liquor_sales
+  description: This table contains all of the data from the Iowa Liquor Sales dataset with some basic transformations applied.
+  columns:
+  - name: vendor_name
+    description: The name of the company that produced or distributed the liquor product sold.
+  - name: item_id
+    description: A numeric ID used to identify the specific liquor product sold.
+  - name: invoice_id
+    description: A unique ID number for each liquor sale invoice.
+  - name: number_of_bottles_sold
+    description: The total number of bottles of a particular liquor product sold.
+  - name: sale_in_dollars
+    description: The total dollar amount of a single liquor sale.
+  - name: loaded_at
+    description: The timestamp when the liquor sale data was loaded into the database.
+  - name: store_name
+    description: The name of the liquor store where the sale occurred.
+  - name: vendor_id
+    description: A numeric ID used to identify the company that produced or distributed the liquor product sold.
+  - name: category_id
+    description: A numeric ID used to categorize the type of liquor, such as wine, beer or spirits.
+  - name: volume_sold_liters
+    description: The total volume of liquor sold in liters.
+  - name: store_location_point
+    description: The geographic coordinates of the liquor store where the sale occurred.
+  - name: category_name
+    description: The name of the liquor category, such as wine, beer or spirits.
+  - name: item_description
+    description: A description of the specific liquor product sold, such as 'Cabernet Sauvignon' or 'Vodka'.
+  - name: store_address
+    description: The street address of the liquor store where the sale occurred.
+  - name: county_id
+    description: A numeric ID used to identify the county where the liquor was sold.
+  - name: bottle_volume_ml
+    description: The volume in milliliters of an individual bottle of liquor sold.
+  - name: store_zipcode
+    description: The ZIP code of the area where the liquor store that made the sale is located.
+  - name: state_bottle_retail
+    description: The recommended retail price per bottle of a particular liquor product set by the state.
+  - name: volume_sold_gallons
+    description: The total volume of liquor sold in gallons.
+  - name: store_city
+    description: The city where the liquor store that made the sale is located.
+  - name: county_name
+    description: The name of the county where the liquor was sold.
+  - name: state_bottle_cost
+    description: The wholesale cost per bottle of a particular liquor product paid by the state.
+  - name: store_id
+    description: A unique ID used to identify the liquor store where the sale occurred.
+  

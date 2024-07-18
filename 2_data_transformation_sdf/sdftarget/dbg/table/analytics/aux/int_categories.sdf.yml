@@ -1,0 +1,55 @@
+table:
+  name: ANALYTICS.AUX.INT_CATEGORIES
+  description: Intermediate table for categories.
+  dialect: snowflake
+  materialization: view
+  purpose: model
+  dependencies:
+  - ANALYTICS.AUX.STG_PYTHON_INGESTOR__IOWA_LIQUOR_SALES
+  depended-on-by:
+  - ANALYTICS.MARTS.INVOICES
+  columns:
+  - name: CATEGORY_ID
+    description: A unique ID number for each category.
+    datatype: decimal(38, 0)
+    lineage:
+      copy:
+      - ANALYTICS.AUX.STG_PYTHON_INGESTOR__IOWA_LIQUOR_SALES.CATEGORY_ID
+  - name: CATEGORY_NAME
+    datatype: varchar
+    lineage:
+      copy:
+      - ANALYTICS.AUX.STG_PYTHON_INGESTOR__IOWA_LIQUOR_SALES.CATEGORY_NAME
+    forward-lineage:
+      copy:
+      - ANALYTICS.MARTS.INVOICES.CATEGORY_NAME
+  - name: LIQUOR_TYPE_NAME
+    datatype: varchar not null
+    lineage:
+      modify:
+      - ANALYTICS.AUX.STG_PYTHON_INGESTOR__IOWA_LIQUOR_SALES.CATEGORY_NAME
+    forward-lineage:
+      copy:
+      - ANALYTICS.MARTS.INVOICES.LIQUOR_TYPE_NAME
+  - name: EFFECTIVE_DT
+    datatype: date
+    lineage:
+      copy:
+      - ANALYTICS.AUX.STG_PYTHON_INGESTOR__IOWA_LIQUOR_SALES.DT
+  - name: LOADED_AT
+    datatype: timestamp
+    lineage:
+      copy:
+      - ANALYTICS.AUX.STG_PYTHON_INGESTOR__IOWA_LIQUOR_SALES.LOADED_AT
+  - name: CATEGORY_IDS
+    datatype: array
+    lineage:
+      modify:
+      - ANALYTICS.AUX.STG_PYTHON_INGESTOR__IOWA_LIQUOR_SALES.CATEGORY_ID
+  lineage:
+    scan:
+    - ANALYTICS.AUX.STG_PYTHON_INGESTOR__IOWA_LIQUOR_SALES.CATEGORY_ID
+    - ANALYTICS.AUX.STG_PYTHON_INGESTOR__IOWA_LIQUOR_SALES.CATEGORY_NAME
+  source-locations:
+  - path: models/aux/int_categories.sdf.yml
+  - path: models/aux/int_categories.sql

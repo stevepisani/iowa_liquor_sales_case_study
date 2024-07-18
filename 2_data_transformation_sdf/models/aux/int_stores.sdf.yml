@@ -1,0 +1,7 @@
+table:
+  name: int_stores
+  description: Intermediate table for stores.
+  columns:
+  - name: store_id
+    description: A unique ID number for each store.
+  
